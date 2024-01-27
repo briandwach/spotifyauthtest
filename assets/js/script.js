@@ -42,12 +42,11 @@ const codeChallenge = base64encode(hashed);
 
 // From Spotify Web API Documentation ----------------------------------------
 const clientId = '2b183a70265148259c2caa4ab030b5ec';
+
 const redirectUri = 'https://briandwach.github.io/spotifyauthtest/';
 
 const scope = 'user-read-private user-read-email';
 const authUrl = new URL("https://accounts.spotify.com/authorize");
-
-
 
 // generated in the previous step
 window.localStorage.setItem('code_verifier', codeVerifier);
@@ -98,6 +97,7 @@ const getToken = async code => {
     localStorage.setItem('access_token', response.access_token);
   };
   
+
 };
 
 authenticateEl.addEventListener('click', spotifyAuthentification);
