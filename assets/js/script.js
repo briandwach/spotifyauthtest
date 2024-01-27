@@ -1,3 +1,9 @@
+var authenticateEl = document.getElementById("authenticate");
+
+var spotifyAuthentification = function() {
+
+localStorage.removeItem('code_verifier');
+
 // From Spotify Web API Documentation ----------------------------------------
 const generateRandomString = (length) => {
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -36,12 +42,11 @@ const codeChallenge = base64encode(hashed);
 
 // From Spotify Web API Documentation ----------------------------------------
 const clientId = '2b183a70265148259c2caa4ab030b5ec';
-const redirectUri = 'http://localhost:8080';
+
+const redirectUri = 'https://briandwach.github.io/spotifyauthtest/';
 
 const scope = 'user-read-private user-read-email';
-const authUrl = new URL("https://briandwach.github.io/spotifyauthtest/");
-
-
+const authUrl = new URL("https://accounts.spotify.com/authorize");
 
 // generated in the previous step
 window.localStorage.setItem('code_verifier', codeVerifier);
@@ -93,4 +98,6 @@ const getToken = async code => {
   };
   
 
-  
+};
+
+authenticateEl.addEventListener('click', spotifyAuthentification);
