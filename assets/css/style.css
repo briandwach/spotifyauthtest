@@ -1,0 +1,23 @@
+header, main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    color: black;
+    background-color: #1DB954;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+h2:hover {
+    color: white;
+    background-color: black;
+    cursor: pointer;
+}
