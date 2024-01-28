@@ -1,5 +1,5 @@
 const clientId = '2b183a70265148259c2caa4ab030b5ec';
-const redirectUri = 'http://127.0.0.1:5500/authorized.html';
+const redirectUri = 'https://briandwach.github.io/spotifyauthtest/authorized.html';
 const url = "https://accounts.spotify.com/api/token";
 
 // From Spotify Web API Documentation ----------------------------------------
@@ -35,7 +35,7 @@ const getToken = async token => {
     localStorage.setItem('refresh_token', response.refresh_token);
 // ---------------------------------------------------------------------------
 
-    window.location.replace('http://127.0.0.1:5500/toptracks.html');
+    window.location.replace('https://briandwach.github.io/spotifyauthtest/toptracks.html');
 };
 
 
