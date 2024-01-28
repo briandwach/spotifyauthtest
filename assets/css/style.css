@@ -21,3 +21,16 @@ h2:hover {
     background-color: black;
     cursor: pointer;
 }
+
+div {
+    width: fit-content;
+    margin: auto;
+}
+
+ul {
+    font-weight: bold;
+}
+
+ul li {
+    font-weight: lighter;
+}
