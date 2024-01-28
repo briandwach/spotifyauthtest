@@ -45,7 +45,7 @@ const codeChallenge = base64encode(hashed);
 const clientId = '2b183a70265148259c2caa4ab030b5ec';
 
 // Before pushing to main branch change the URL to the final project deployed URL
-const redirectUri = 'http://127.0.0.1:5500/authorized.html';
+const redirectUri = 'https://briandwach.github.io/spotifyauthtest/authorized.html';
 
 const scope = 'user-read-private user-read-email playlist-modify-public user-top-read';
 const authUrl = new URL("https://accounts.spotify.com/authorize");
