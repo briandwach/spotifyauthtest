@@ -1,6 +1,6 @@
 var authenticateEl = document.getElementById("authenticate");
 
-var spotifyAuthentification = function() {
+var spotifyAuthentification = async function() {
 
 localStorage.removeItem('code_verifier');
 
@@ -12,7 +12,7 @@ const generateRandomString = (length) => {
 };
 
 const codeVerifier = generateRandomString(64);
-
+// ---------------------------------------------------------------------------
 
 
 // From Spotify Web API Documentation ----------------------------------------
@@ -21,7 +21,7 @@ const sha256 = async (plain) => {
     const data = encoder.encode(plain);
     return window.crypto.subtle.digest('SHA-256', data);
 };
-
+// ---------------------------------------------------------------------------
 
 
 // From Spotify Web API Documentation ----------------------------------------
@@ -31,21 +31,23 @@ const base64encode = (input) => {
       .replace(/\+/g, '-')
       .replace(/\//g, '_');
   };
-  
+// ---------------------------------------------------------------------------  
 
 
 // From Spotify Web API Documentation ----------------------------------------
-const hashed = sha256(codeVerifier);
+const hashed = await sha256(codeVerifier);
 const codeChallenge = base64encode(hashed);
-
+// ---------------------------------------------------------------------------
 
 
 // From Spotify Web API Documentation ----------------------------------------
+// clientID is specific to the registered application with Spotify
 const clientId = '2b183a70265148259c2caa4ab030b5ec';
 
-const redirectUri = 'https://briandwach.github.io/spotifyauthtest/';
+// Before pushing to main branch change the URL to the final project deployed URL
+const redirectUri = 'http://127.0.0.1:5500/authorized.html';
 
-const scope = 'user-read-private user-read-email';
+const scope = 'user-read-private user-read-email playlist-modify-public user-top-read';
 const authUrl = new URL("https://accounts.spotify.com/authorize");
 
 // generated in the previous step
@@ -55,6 +57,7 @@ const params =  {
   response_type: 'code',
   client_id: clientId,
   scope,
+  state: 'concertsampler',
   code_challenge_method: 'S256',
   code_challenge: codeChallenge,
   redirect_uri: redirectUri
@@ -62,41 +65,7 @@ const params =  {
 
 authUrl.search = new URLSearchParams(params).toString();
 window.location.href = authUrl.toString();
-
-
-
-// From Spotify Web API Documentation ----------------------------------------
-const urlParams = new URLSearchParams(window.location.search);
-let code = urlParams.get('code');
-
-
-
-// From Spotify Web API Documentation ----------------------------------------
-const getToken = async code => {
-
-    // stored in the previous step
-    let codeVerifier = localStorage.getItem('code_verifier');
-  
-    const payload = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        client_id: clientId,
-        grant_type: 'authorization_code',
-        code,
-        redirect_uri: redirectUri,
-        code_verifier: codeVerifier,
-      }),
-    };
-  
-    const body = fetch(url, payload);
-    const response = body.json();
-  
-    localStorage.setItem('access_token', response.access_token);
-  };
-  
+// ---------------------------------------------------------------------------
 
 };
 
